@@ -23,8 +23,8 @@ class BasePathwayAdmin(item_editor.ItemEditor, admin.ModelAdmin):
         }],
         ['Which lots does this pathway apply to?', {
             'fields': [
-                ('private_owners', 'public_owners',),
-                'specific_public_owners',
+                ('public_owners', 'specific_public_owners'),
+                ('private_owners', 'specific_private_owners'),
             ],
         }],
         item_editor.FEINCMS_CONTENT_FIELDSET,

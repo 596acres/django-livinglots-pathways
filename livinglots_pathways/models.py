@@ -15,7 +15,11 @@ class PathwayManager(models.Manager):
 
         # Ownership filters
         if lot.owner.owner_type == 'private':
-            pathways = pathways.filter(private_owners=True)
+            pathways = pathways.filter(
+                (Q(specific_private_owners__isnull=True) |
+                 Q(specific_private_owners=lot.owner)),
+                private_owners=True
+            )
         elif lot.owner.owner_type == 'public':
             # Public lots: get pathways for public owners and pathways that
             # either do not specify certain public owners or match the given
@@ -42,6 +46,13 @@ class BasePathway(models.Model):
     private_owners = models.BooleanField(_('private owners'),
         help_text=_('This pathway applies to lots with private owners.'),
     )
+    specific_private_owners = models.ManyToManyField(get_owner_model(),
+        blank=True,
+        null=True,
+        limit_choices_to={'owner_type': 'private',},
+        related_name='private+',
+        help_text=_('This pathway applies to lots with these private owners.'),
+    )
     public_owners = models.BooleanField(_('public owners'),
         help_text=_('This pathway applies to lots with public owners.'),
     )
@@ -49,8 +60,8 @@ class BasePathway(models.Model):
         blank=True,
         null=True,
         limit_choices_to={'owner_type': 'public',},
-        help_text=_('This pathway applies to lots with the given  public '
-                    'owners.'),
+        related_name='public+',
+        help_text=_('This pathway applies to lots with these public owners.'),
     )
 
     class Meta:
