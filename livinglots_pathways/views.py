@@ -15,11 +15,11 @@ class PathwaysFeinCMSViewMixin(object):
             context, **response_kwargs)
 
 
-class PathwaysDetailView(PathwaysFeinCMSViewMixin, DetailView):
+class BasePathwaysDetailView(PathwaysFeinCMSViewMixin, DetailView):
     pass
 
 
-class PathwaysListView(PathwaysFeinCMSViewMixin, ListView):
+class BasePathwaysListView(PathwaysFeinCMSViewMixin, ListView):
     redirect_to_page_slug = 'pathways-list'
 
     def get(self, request, *args, **kwargs):
