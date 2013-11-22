@@ -4,7 +4,7 @@ from classytags.arguments import Argument
 from classytags.core import Options
 from classytags.helpers import AsTag, InclusionTag
 
-from ..models import Pathway
+from livinglots.models import get_pathway_model
 
 register = template.Library()
 
@@ -12,7 +12,7 @@ register = template.Library()
 class PathwaysTag(object):
 
     def get_objects(self, target):
-        return Pathway.objects.get_for_lot(target)
+        return get_pathway_model().objects.get_for_lot(target)
 
 
 class RenderPathwaySummaryList(PathwaysTag, InclusionTag):
