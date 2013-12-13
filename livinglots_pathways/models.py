@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from livinglots import get_owner_model
 
 
-class PathwayManager(models.Manager):
+class BasePathwayManager(models.Manager):
 
     def get_for_lot(self, lot):
         pathways = self.all()
@@ -33,7 +33,7 @@ class PathwayManager(models.Manager):
 
 
 class BasePathway(models.Model):
-    objects = PathwayManager()
+    objects = BasePathwayManager()
 
     name = models.CharField(_('name'), max_length=256)
     slug = models.SlugField(_('slug'), max_length=256)
