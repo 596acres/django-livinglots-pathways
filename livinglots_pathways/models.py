@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
-from livinglots import get_owner_model
+from livinglots import get_owner_model_name
 
 
 class BasePathwayManager(models.Manager):
@@ -46,7 +46,7 @@ class BasePathway(models.Model):
     private_owners = models.BooleanField(_('private owners'),
         help_text=_('This pathway applies to lots with private owners.'),
     )
-    specific_private_owners = models.ManyToManyField(get_owner_model(),
+    specific_private_owners = models.ManyToManyField(get_owner_model_name(),
         blank=True,
         null=True,
         limit_choices_to={'owner_type': 'private',},
@@ -56,7 +56,7 @@ class BasePathway(models.Model):
     public_owners = models.BooleanField(_('public owners'),
         help_text=_('This pathway applies to lots with public owners.'),
     )
-    specific_public_owners = models.ManyToManyField(get_owner_model(),
+    specific_public_owners = models.ManyToManyField(get_owner_model_name(),
         blank=True,
         null=True,
         limit_choices_to={'owner_type': 'public',},
