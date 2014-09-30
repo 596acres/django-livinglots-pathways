@@ -44,6 +44,7 @@ class BasePathway(models.Model):
 
     # Filters for determining which lots a pathway can apply to
     private_owners = models.BooleanField(_('private owners'),
+        default=False,
         help_text=_('This pathway applies to lots with private owners.'),
     )
     specific_private_owners = models.ManyToManyField(get_owner_model_name(),
@@ -54,6 +55,7 @@ class BasePathway(models.Model):
         help_text=_('This pathway applies to lots with these private owners.'),
     )
     public_owners = models.BooleanField(_('public owners'),
+        default=False,
         help_text=_('This pathway applies to lots with public owners.'),
     )
     specific_public_owners = models.ManyToManyField(get_owner_model_name(),
