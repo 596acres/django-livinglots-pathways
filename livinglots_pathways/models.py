@@ -41,6 +41,7 @@ class BasePathway(models.Model):
                                     db_index=True)
     author = models.ForeignKey(User, verbose_name=_('author'), null=True,
                                blank=True)
+    order = models.PositiveIntegerField(default=10)
 
     # Filters for determining which lots a pathway can apply to
     private_owners = models.BooleanField(_('private owners'),
@@ -68,6 +69,7 @@ class BasePathway(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ('order', 'name',)
 
     def __unicode__(self):
         return self.name

@@ -4,8 +4,8 @@ from feincms.admin import item_editor
 
 
 class BasePathwayAdmin(item_editor.ItemEditor, admin.ModelAdmin):
-    list_display = ['name', 'is_active',]
-    list_editable = ['is_active',]
+    list_display = ['name', 'is_active', 'order',]
+    list_editable = ['is_active', 'order',]
     list_filter = ['is_active',]
     raw_id_fields = ['author']
     search_fields = ['name', 'slug',]
@@ -17,7 +17,7 @@ class BasePathwayAdmin(item_editor.ItemEditor, admin.ModelAdmin):
     fieldsets = [
         [None, {
             'fields': [
-                ('is_active', 'author',),
+                ('is_active', 'order', 'author',),
                 ('name', 'slug',),
             ],
         }],
