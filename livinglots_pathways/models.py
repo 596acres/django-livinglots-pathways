@@ -50,7 +50,6 @@ class BasePathway(models.Model):
     )
     specific_private_owners = models.ManyToManyField(get_owner_model_name(),
         blank=True,
-        null=True,
         limit_choices_to={'owner_type': 'private',},
         related_name='private+',
         help_text=_('This pathway applies to lots with these private owners.'),
@@ -61,7 +60,6 @@ class BasePathway(models.Model):
     )
     specific_public_owners = models.ManyToManyField(get_owner_model_name(),
         blank=True,
-        null=True,
         limit_choices_to={'owner_type': 'public',},
         related_name='public+',
         help_text=_('This pathway applies to lots with these public owners.'),
